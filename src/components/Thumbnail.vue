@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
+import { getThumbnail } from "@universalappfactory/tauri-plugin-medialibrary";
 import { onMounted, ref } from "vue";
-import { getThumbnail } from "../../../tauri-plugin-medialibrary/guest-js/index";
 
 const data = ref<string | undefined>();
 
