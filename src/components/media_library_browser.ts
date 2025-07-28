@@ -9,7 +9,21 @@ import {
   requestPermissions as pluginRequestPermissions,
   getImage as pluginGetImage,
 } from "@universalappfactory/tauri-plugin-medialibrary";
-import { ref } from "vue";
+
+// for development
+// import {
+//   getAvailableSources,
+//   getImages,
+//   GetLibraryContentRequest,
+//   ImageInfo,
+//   MediaLibrarySource,
+//   PermissionResponse,
+//   PluginError,
+//   requestPermissions as pluginRequestPermissions,
+//   getImage as pluginGetImage,
+// } from "../../../tauri-plugin-medialibrary";
+
+import { ref, watch } from "vue";
 
 export interface Page {
   limit: number;
@@ -50,9 +64,9 @@ export function useMediaLibraryBrowser() {
     console.error(error);
     const err = error as PluginError;
     if (err) {
-      errorMessage.value = err.errorKind;
+      errorMessage.value += err.errorKind;
     } else {
-      error.value = error as string;
+      error.value += error as string;
     }
   };
 
@@ -69,6 +83,7 @@ export function useMediaLibraryBrowser() {
   };
 
   const loadImages = async (page?: Page) => {
+    // alert(`->${selectedSource.value as MediaLibrarySource}`);
     clearError();
 
     if (!page) {
@@ -112,6 +127,10 @@ export function useMediaLibraryBrowser() {
       handleError(e);
     }
   };
+
+  watch(selectedSource, () => {
+    loadImages();
+  });
 
   return {
     errorMessage,

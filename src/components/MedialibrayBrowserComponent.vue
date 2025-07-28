@@ -63,10 +63,13 @@
                             {{ item.path }}
                         </div>
                         <div class="text-xs opacity-60 text-ellipsis">
-                            {{ item.contentUri }}
+                            Content URI: {{ item.contentUri }}
                         </div>
                         <div class="text-xs opacity-60 text-ellipsis">
-                            {{ item.mimeType }}
+                            Mime Type: {{ item.mimeType }}
+                        </div>
+                        <div class="text-xs opacity-60 text-ellipsis">
+                            Date Taken: {{ item.metaData }}
                         </div>
                     </div>
                 </li>
@@ -97,7 +100,7 @@ const browser = useMediaLibraryBrowser();
 
 onMounted(async () => {
     await browser.getSources();
-    await browser.loadImages();
+    // await browser.loadImages();
 });
 
 // simple function to open an image on different platforms
