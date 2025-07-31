@@ -8,6 +8,8 @@ import {
   PluginError,
   requestPermissions as pluginRequestPermissions,
   getImage as pluginGetImage,
+  SortDirection,
+  SortColumn,
 } from "@universalappfactory/tauri-plugin-medialibrary";
 
 // for development
@@ -21,6 +23,8 @@ import {
 //   PluginError,
 //   requestPermissions as pluginRequestPermissions,
 //   getImage as pluginGetImage,
+//   SortDirection,
+//   SortColumn,
 // } from "../../../tauri-plugin-medialibrary";
 
 import { ref, watch } from "vue";
@@ -33,6 +37,8 @@ export interface Page {
 export function useMediaLibraryBrowser() {
   const errorMessage = ref<string | undefined>();
   const selectedSource = ref<string>("");
+  const sortDirection = ref<SortDirection>("Ascending");
+  const sortColumn = ref<SortColumn>("DateAdded");
   const images = ref<ImageInfo[]>([]);
   const availableSources = ref<MediaLibrarySource[]>([]);
   const permissionState = ref<PermissionResponse | null>();
@@ -100,6 +106,8 @@ export function useMediaLibraryBrowser() {
       limit: currentPage?.limit ?? 10,
       offset: currentPage?.offset ?? 0,
       source: selectedSource.value as MediaLibrarySource,
+      sortDirection: sortDirection.value as SortDirection,
+      sortColumn: sortColumn.value as SortColumn,
     };
 
     try {
@@ -132,6 +140,14 @@ export function useMediaLibraryBrowser() {
     loadImages();
   });
 
+  watch(sortDirection, () => {
+    loadImages();
+  });
+
+  watch(sortColumn, () => {
+    loadImages();
+  });
+
   return {
     errorMessage,
     selectedSource,
@@ -144,5 +160,7 @@ export function useMediaLibraryBrowser() {
     nextPage,
     hasNextPage,
     getImage,
+    sortDirection,
+    sortColumn,
   };
 }

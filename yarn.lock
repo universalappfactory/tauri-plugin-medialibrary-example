@@ -555,10 +555,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.8.tgz#958b91c991b1867ced318bedea0e215ee050726e"
   integrity sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==
 
-"@universalappfactory/tauri-plugin-medialibrary@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@universalappfactory/tauri-plugin-medialibrary/-/tauri-plugin-medialibrary-0.4.0.tgz#16c715379a3a8cea7f4c7521c935241fac1f1c6f"
-  integrity sha512-fjcHF/GRiU9+2RnIebOQ2Ww/o+QocFxYqfW+HJ2sZlAW5cug4WZh4bur6IGOJYCQ3FUlCdcuPj9+mlP5kym6kg==
+"@universalappfactory/tauri-plugin-medialibrary@^0.5.3":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@universalappfactory/tauri-plugin-medialibrary/-/tauri-plugin-medialibrary-0.5.3.tgz#c5cf5a2e0c397eea9e2d7c6f953b1b2684b553a3"
+  integrity sha512-bAR9PtEKUy/QQ7yNhGpE9k8bhaqwCBG1e/g1PmuCQbE0ClTURlWYiY34ge2RErjHzmlouIGm1ZQSsT+t8T7txg==
   dependencies:
     "@tauri-apps/api" "2.6.0"
 

@@ -49,6 +49,34 @@
             </div>
         </div>
 
+        <div class="border border-base-300 p-2 flex gap-2">
+            <div class="flex-grow">
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Sort Field</legend>
+                    <select
+                        class="select w-full"
+                        v-model="browser.sortColumn.value"
+                    >
+                        <option key="DateAdded">DateAdded</option>
+                        <option key="DateModified">DateModified</option>
+                        <option key="DateTaken">DateTaken</option>
+                    </select>
+                </fieldset>
+            </div>
+            <div class="flex-grow">
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Sort Direction</legend>
+                    <select
+                        class="select w-full"
+                        v-model="browser.sortDirection.value"
+                    >
+                        <option key="Ascending">Ascending</option>
+                        <option key="Descending">Descending</option>
+                    </select>
+                </fieldset>
+            </div>
+        </div>
+
         <div class="flex-auto overflow-y-scroll h-[0px] border border-base-300">
             <ul class="list bg-base-100 rounded-box">
                 <li
@@ -69,7 +97,15 @@
                             Mime Type: {{ item.mimeType }}
                         </div>
                         <div class="text-xs opacity-60 text-ellipsis">
-                            Date Taken: {{ item.metaData }}
+                            <p v-if="item.metaData?.dateAdded">
+                                Date Added: {{ item.metaData?.dateAdded }}
+                            </p>
+                            <p v-if="item.metaData?.dateModified">
+                                Date Modified: {{ item.metaData?.dateModified }}
+                            </p>
+                            <p v-if="item.metaData?.dateTaken">
+                                Date Taken: {{ item.metaData?.dateTaken }}
+                            </p>
                         </div>
                     </div>
                 </li>
