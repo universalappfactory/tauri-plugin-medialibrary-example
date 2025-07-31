@@ -1,10 +1,10 @@
-# Media Library Browser Example
+# Tauri Media Library Browser Example
 
 This is a simple example application using the tauri-plugin-medialibrary plugin.
 
 https://github.com/universalappfactory/tauri-plugin-medialibrary
 
-It uses vue, tailwindcss and daisyui
+It uses tauri, vue, tailwindcss and daisyui
 
 ## Install
 
