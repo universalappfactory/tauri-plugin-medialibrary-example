@@ -25,7 +25,7 @@ import {
 //   getImage as pluginGetImage,
 //   SortDirection,
 //   SortColumn,
-// } from "../../../tauri-plugin-medialibrary";
+// } from "../../../tauri-plugin-medialibrary/guest-js/index";
 
 import { ref, watch } from "vue";
 
@@ -37,8 +37,8 @@ export interface Page {
 export function useMediaLibraryBrowser() {
   const errorMessage = ref<string | undefined>();
   const selectedSource = ref<string>("");
-  const sortDirection = ref<SortDirection>("Ascending");
-  const sortColumn = ref<SortColumn>("DateAdded");
+  const sortDirection = ref<SortDirection>(SortDirection.Ascending);
+  const sortColumn = ref<SortColumn>(SortColumn.DateAdded);
   const images = ref<ImageInfo[]>([]);
   const availableSources = ref<MediaLibrarySource[]>([]);
   const permissionState = ref<PermissionResponse | null>();
@@ -108,6 +108,7 @@ export function useMediaLibraryBrowser() {
       source: selectedSource.value as MediaLibrarySource,
       sortDirection: sortDirection.value as SortDirection,
       sortColumn: sortColumn.value as SortColumn,
+      includeFileMetadata: true,
     };
 
     try {

@@ -87,9 +87,7 @@
                 >
                     <Thumbnail :uri="item.contentUri" />
                     <div>
-                        <div class="text-xs">
-                            {{ item.path }}
-                        </div>
+                        <div class="text-xs">Path:{{ item.path }}</div>
                         <div class="text-xs opacity-60 text-ellipsis">
                             Content URI: {{ item.contentUri }}
                         </div>
@@ -97,14 +95,27 @@
                             Mime Type: {{ item.mimeType }}
                         </div>
                         <div class="text-xs opacity-60 text-ellipsis">
-                            <p v-if="item.metaData?.dateAdded">
-                                Date Added: {{ item.metaData?.dateAdded }}
+                            <p v-if="hasMetaData(item, 'dateAdded')">
+                                Date Added: {{ getMetaData(item, "dateAdded") }}
                             </p>
-                            <p v-if="item.metaData?.dateModified">
-                                Date Modified: {{ item.metaData?.dateModified }}
+                            <p v-if="hasMetaData(item, 'dateTaken')">
+                                Date Taken: {{ getMetaData(item, "dateTaken") }}
                             </p>
-                            <p v-if="item.metaData?.dateTaken">
-                                Date Taken: {{ item.metaData?.dateTaken }}
+                            <p v-if="hasMetaData(item, 'dateModified')">
+                                Date Modified:
+                                {{ getMetaData(item, "dateModified") }}
+                            </p>
+                            <p v-if="hasMetaData(item, 'fileCreated')">
+                                File Created:
+                                {{ getMetaData(item, "fileCreated") }}
+                            </p>
+                            <p v-if="hasMetaData(item, 'fileModified')">
+                                File Modified:
+                                {{ getMetaData(item, "fileModified") }}
+                            </p>
+                            <p v-if="hasMetaData(item, 'fileSize')">
+                                File Size:
+                                {{ getMetaData(item, "fileSize") }}
                             </p>
                         </div>
                     </div>
@@ -129,7 +140,11 @@ import Thumbnail from "./Thumbnail.vue";
 import ErrorHandler from "./ErrorHandler.vue";
 import { useMediaLibraryBrowser } from "./media_library_browser";
 import { onMounted } from "vue";
-import { ImageInfo } from "../../../tauri-plugin-medialibrary/guest-js";
+import {
+    ImageInfo,
+    hasMetaData,
+    getMetaData,
+} from "../../../tauri-plugin-medialibrary/guest-js";
 import { openUrl, openPath } from "@tauri-apps/plugin-opener";
 
 const browser = useMediaLibraryBrowser();
