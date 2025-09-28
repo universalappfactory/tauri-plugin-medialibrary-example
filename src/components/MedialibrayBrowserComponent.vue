@@ -80,13 +80,15 @@
         <div class="flex-auto overflow-y-scroll h-[0px] border border-base-300">
             <ul class="list bg-base-100 rounded-box">
                 <li
-                    class="list-row overflow-clip"
-                    @click="openImage(item)"
+                    class="list-row overflow-clip bg-red-100"
                     v-for="(item, index) of browser.images.value"
                     :key="index"
                 >
-                    <Thumbnail :uri="item.contentUri" />
-                    <div>
+                    <Thumbnail
+                        @click="openImage(item)"
+                        :uri="item.contentUri"
+                    />
+                    <div @click="openImage(item)">
                         <div class="text-xs">Path:{{ item.path }}</div>
                         <div class="text-xs opacity-60 text-ellipsis">
                             Content URI: {{ item.contentUri }}
@@ -118,6 +120,9 @@
                                 {{ getMetaData(item, "fileSize") }}
                             </p>
                         </div>
+                    </div>
+                    <div @click="deleteItem(item)" class="flex flex-col">
+                        <button class="btn">Del</button>
                     </div>
                 </li>
 
@@ -165,5 +170,10 @@ const openImage = async (image: ImageInfo) => {
         console.log("try path", image.path);
         await openPath(image.path);
     }
+};
+
+const deleteItem = async (item: ImageInfo) => {
+    console.log("delete item", item);
+    await browser.deleteImage(item.contentUri);
 };
 </script>

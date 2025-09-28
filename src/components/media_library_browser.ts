@@ -1,18 +1,3 @@
-import {
-  getAvailableSources,
-  getImages,
-  GetLibraryContentRequest,
-  ImageInfo,
-  MediaLibrarySource,
-  PermissionResponse,
-  PluginError,
-  requestPermissions as pluginRequestPermissions,
-  getImage as pluginGetImage,
-  SortDirection,
-  SortColumn,
-} from "@universalappfactory/tauri-plugin-medialibrary";
-
-// for development
 // import {
 //   getAvailableSources,
 //   getImages,
@@ -25,7 +10,23 @@ import {
 //   getImage as pluginGetImage,
 //   SortDirection,
 //   SortColumn,
-// } from "../../../tauri-plugin-medialibrary/guest-js/index";
+// } from "@universalappfactory/tauri-plugin-medialibrary";
+
+// for development
+import {
+  getAvailableSources,
+  getImages,
+  GetLibraryContentRequest,
+  ImageInfo,
+  MediaLibrarySource,
+  PermissionResponse,
+  PluginError,
+  requestPermissions as pluginRequestPermissions,
+  getImage as pluginGetImage,
+  deleteImage as pluginDeleteImage,
+  SortDirection,
+  SortColumn,
+} from "../../../tauri-plugin-medialibrary/guest-js/index";
 
 import { ref, watch } from "vue";
 
@@ -37,7 +38,7 @@ export interface Page {
 export function useMediaLibraryBrowser() {
   const errorMessage = ref<string | undefined>();
   const selectedSource = ref<string>("");
-  const sortDirection = ref<SortDirection>(SortDirection.Ascending);
+  const sortDirection = ref<SortDirection>(SortDirection.Descending);
   const sortColumn = ref<SortColumn>(SortColumn.DateAdded);
   const images = ref<ImageInfo[]>([]);
   const availableSources = ref<MediaLibrarySource[]>([]);
@@ -137,6 +138,24 @@ export function useMediaLibraryBrowser() {
     }
   };
 
+  const deleteImage = async (contentUri: string) => {
+    try {
+      console.log(`Deleting image with contentUri: ${contentUri}`);
+      await pluginDeleteImage(contentUri);
+      console.log(`===> DONE`);
+
+      const index = images.value.findIndex(
+        (image) => image.contentUri === contentUri,
+      );
+      if (index !== -1) {
+        images.value.splice(index, 1);
+      }
+    } catch (e) {
+      console.log("deleteImage Error", e);
+      handleError(e);
+    }
+  };
+
   watch(selectedSource, () => {
     loadImages();
   });
@@ -163,5 +182,6 @@ export function useMediaLibraryBrowser() {
     getImage,
     sortDirection,
     sortColumn,
+    deleteImage,
   };
 }

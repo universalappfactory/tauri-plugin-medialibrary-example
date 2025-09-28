@@ -19,6 +19,7 @@
     "medialibrary:allow-get-thumbnail",
     "medialibrary:allow-get-available-sources",
     "medialibrary:allow-request-permissions",
+    "medialibrary:allow-delete-image",
     {
       "identifier": "fs:read-files",
       "allow": [
