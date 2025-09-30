@@ -1,19 +1,3 @@
-// import {
-//   getAvailableSources,
-//   getImages,
-//   GetLibraryContentRequest,
-//   ImageInfo,
-//   MediaLibrarySource,
-//   PermissionResponse,
-//   PluginError,
-//   requestPermissions as pluginRequestPermissions,
-//   getImage as pluginGetImage,
-//   deleteImage as pluginDeleteImage,
-//   SortDirection,
-//   SortColumn,
-// } from "@universalappfactory/tauri-plugin-medialibrary";
-
-// for development
 import {
   getAvailableSources,
   getImages,
@@ -27,7 +11,23 @@ import {
   deleteImage as pluginDeleteImage,
   SortDirection,
   SortColumn,
-} from "../../../tauri-plugin-medialibrary/guest-js/index";
+} from "@universalappfactory/tauri-plugin-medialibrary";
+
+// for development
+// import {
+//   getAvailableSources,
+//   getImages,
+//   GetLibraryContentRequest,
+//   ImageInfo,
+//   MediaLibrarySource,
+//   PermissionResponse,
+//   PluginError,
+//   requestPermissions as pluginRequestPermissions,
+//   getImage as pluginGetImage,
+//   deleteImage as pluginDeleteImage,
+//   SortDirection,
+//   SortColumn,
+// } from "../../../tauri-plugin-medialibrary/guest-js/index";
 
 import { ref, watch } from "vue";
 

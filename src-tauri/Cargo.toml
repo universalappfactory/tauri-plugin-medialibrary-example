@@ -26,12 +26,20 @@ log = "0.4.26"
 tauri-plugin-fs = "2.4.2"
 tauri-plugin-log = "2.7.0"
 
-# tauri-plugin-medialibrary = { git = "https://github.com/universalappfactory/tauri-plugin-medialibrary" }
-# for development
-tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary" }
+tauri-plugin-medialibrary = { git = "https://github.com/universalappfactory/tauri-plugin-medialibrary" }
 
 [target.'cfg(all(unix, not(target_os = "android")))'.dependencies]
-tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["xdg"] }
+tauri-plugin-medialibrary = { git = "https://github.com/universalappfactory/tauri-plugin-medialibrary", features = ["xdg"] }
 
 [target.'cfg(windows)'.dependencies]
-tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["thumb_cache"] }
+tauri-plugin-medialibrary = { git = "https://github.com/universalappfactory/tauri-plugin-medialibrary", features = ["thumb_cache"] }
+
+
+# # for development (you have to comment the above lines)
+# tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary" }
+
+# [target.'cfg(all(unix, not(target_os = "android")))'.dependencies]
+# tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["xdg"] }
+
+# [target.'cfg(windows)'.dependencies]
+# tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["thumb_cache"] }

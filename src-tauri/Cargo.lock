@@ -4832,6 +4832,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-medialibrary"
 version = "0.1.0"
+source = "git+https://github.com/universalappfactory/tauri-plugin-medialibrary#5502371ca7e23e2da71d41c80ed5696ba19f40a7"
 dependencies = [
  "allmytoes",
  "base64 0.22.1",
