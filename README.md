@@ -9,8 +9,8 @@ It uses tauri, vue, tailwindcss and daisyui
 ## Install
 
 ```
-git clone https://github.com/universalappfactory/tauri-plugin-medialibrary.git
-cd tauri-plugin-medialibrary
+git clone https://github.com/universalappfactory/tauri-plugin-medialibrary-example.git
+cd tauri-plugin-medialibrary-example
 yarn
 cargo tauri dev
 

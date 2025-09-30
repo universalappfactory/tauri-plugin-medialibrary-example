@@ -1,6 +1,6 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
-  "identifier": "default_android",
+  "identifier": "default_windows",
   "description": "Capability for the main window",
   "windows": ["main"],
   "permissions": [
@@ -10,10 +10,7 @@
       "identifier": "medialibrary:global-scope",
       "allow": [
         {
-          "source": "ExternalStorage"
-        },
-        {
-          "source": "VolumeExternalPrimary"
+          "source": "PictureDir"
         }
       ]
     },
@@ -26,20 +23,27 @@
     {
       "identifier": "fs:read-files",
       "allow": [
-        { "path": "$PICTURE/**" },
-        { "path": "$APPDATA/**" },
-        { "path": "storage/emulated/0/DCIM/Camera/**" }
+        {
+          "path": "$PICTURE/**"
+        },
+        {
+          "path": "$APPDATA/**"
+        },
+        {
+          "path": "storage/emulated/0/DCIM/Camera/**"
+        }
       ]
     },
-    "fs:allow-picture-read-recursive",
+    "fs:default",
+    "opener:allow-open-url",
     {
-      "identifier": "opener:allow-open-url",
+      "identifier": "opener:allow-open-path",
       "allow": [
         {
-          "url": "content://media/external/**"
+          "path": "$PICTURE/**"
         }
       ]
     }
   ],
-  "platforms": ["android"]
+  "platforms": ["windows"]
 }
