@@ -15,31 +15,33 @@ name = "medialibrary_browser_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
-tauri-build = { version = "2.4.1", features = [] }
+tauri-build = { version = "2.5.1", features = [] }
 
 [dependencies]
-tauri = { version = "2.8.5", features = [] }
-tauri-plugin-opener = "2.5.0"
+tauri = { version = "2.9.2", features = [] }
+tauri-plugin-opener = "2.5.2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 log = "0.4.26"
-tauri-plugin-fs = "2.4.2"
-tauri-plugin-log = "2.7.0"
+tauri-plugin-fs = "2.4.4"
+tauri-plugin-log = "2.7.1"
 
-tauri-plugin-medialibrary = { git = "https://github.com/universalappfactory/tauri-plugin-medialibrary" }
-
-[target.'cfg(all(unix, not(target_os = "android")))'.dependencies]
-tauri-plugin-medialibrary = { git = "https://github.com/universalappfactory/tauri-plugin-medialibrary", features = ["xdg"] }
-
-[target.'cfg(windows)'.dependencies]
-tauri-plugin-medialibrary = { git = "https://github.com/universalappfactory/tauri-plugin-medialibrary", features = ["thumb_cache"] }
-
-
-# # for development (you have to comment the above lines)
-# tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary" }
-
-# [target.'cfg(all(unix, not(target_os = "android")))'.dependencies]
-# tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["xdg"] }
+#tauri-plugin-medialibrary = { version = "0.12.0" }
+#[target.'cfg(all(unix, not(target_os = "android")))'.dependencies]
+#tauri-plugin-medialibrary = { version = "0.12.0", features = ["xdg"] }
 
 # [target.'cfg(windows)'.dependencies]
-# tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["thumb_cache"] }
+# tauri-plugin-medialibrary = { version = "0.12.0", features = ["thumb_cache"] }
+
+# for development (you have to comment the above lines)
+[target.'cfg(all(unix, target_os = "android"))'.dependencies]
+tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary"  }
+
+[target.'cfg(all(unix, not(target_os = "android")))'.dependencies]
+tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["amt"] }
+
+[target.'cfg(windows)'.dependencies]
+tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["thumb_cache"] }
+
+[patch.crates-io]
+allmytoes = { git = "https://gitlab.com/dlehmeier/allmytoes"}
