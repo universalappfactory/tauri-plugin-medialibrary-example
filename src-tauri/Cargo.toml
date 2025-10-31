@@ -37,8 +37,8 @@ tauri-plugin-log = "2.7.1"
 [target.'cfg(all(unix, target_os = "android"))'.dependencies]
 tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary"  }
 
-[target.'cfg(all(unix, not(target_os = "android")))'.dependencies]
-tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["amt"] }
+#[target.'cfg(all(unix, not(target_os = "android")))'.dependencies]
+#tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["amt"] }
 
 [target.'cfg(windows)'.dependencies]
 tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary", features = ["thumb_cache"] }
