@@ -50,7 +50,7 @@
         </div>
 
         <div class="border border-base-300 p-2 flex gap-2">
-            <div class="flex-grow">
+            <div class="grow">
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Sort Field</legend>
                     <select
@@ -63,7 +63,7 @@
                     </select>
                 </fieldset>
             </div>
-            <div class="flex-grow">
+            <div class="grow">
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Sort Direction</legend>
                     <select
@@ -77,10 +77,10 @@
             </div>
         </div>
 
-        <div class="flex-auto overflow-y-scroll h-[0px] border border-base-300">
-            <ul class="list bg-base-100 rounded-box">
+        <div class="flex-auto overflow-y-scroll h-0 border border-base-300">
+            <ul class="list bg-base-100 rounded-box gap-4">
                 <li
-                    class="list-row overflow-clip bg-red-100"
+                    class="list-row overflow-clip bg-accent text-accent-content"
                     v-for="(item, index) of browser.images.value"
                     :key="index"
                 >
