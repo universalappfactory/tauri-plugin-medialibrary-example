@@ -10,9 +10,9 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@tauri-apps/api": "^2.6.0",
-    "@tauri-apps/plugin-fs": "^2.3.0",
-    "@tauri-apps/plugin-opener": "^2.3.1",
+    "@tauri-apps/api": "^2.10.1",
+    "@tauri-apps/plugin-fs": "^2.4.5",
+    "@tauri-apps/plugin-opener": "^2.5.3",
     "@universalappfactory/tauri-plugin-medialibrary": "^0.11.0",
     "add": "^2.0.6",
     "vue": "^3.5.13",
