@@ -84,13 +84,29 @@
                     v-for="(item, index) of browser.images.value"
                     :key="index"
                 >
-                    <Thumbnail
+                    <!--
+                        It is possible to load the thumbnail data via a 'get_thumbnail' command
+                        Or you can use the custom 'thumbnail' or 'image' protocol handllers which will deliver
+                        the thumbnail or full image data
+                    -->
+
+                    <!--
+                        Loading thumbnail via command get_thumbnail
+                    -->
+                    <!-- <ThumbnailByCommand
                         @click="openImage(item)"
                         :uri="item.contentUri"
-                    />
+                    /> -->
+
+                    <!-- using the custom 'image' protocol -->
+                    <!-- <Image @click="openImage(item)" :uri="item.imageUri" /> -->
+
+                    <!-- using the custom 'thumbnail' protocol -->
+                    <Image @click="openImage(item)" :uri="item.thumbnailUri" />
+
                     <div @click="openImage(item)">
-                        <div class="text-xs">Path:{{ item.path }}</div>
-                        <div class="text-xs opacity-60 text-ellipsis">
+                        <!-- <div class="text-xs">Path:{{ item.path }}</div> -->
+                        <div class="text-xs opacity-60 text-ellipsis hidden">
                             Content URI: {{ item.contentUri }}
                         </div>
                         <div class="text-xs opacity-60 text-ellipsis">
@@ -141,7 +157,8 @@
 </template>
 
 <script setup lang="ts">
-import Thumbnail from "./Thumbnail.vue";
+import ThumbnailByCommand from "./ThumbnailByCommand.vue";
+import Image from "./Image.vue";
 import ErrorHandler from "./ErrorHandler.vue";
 import { useMediaLibraryBrowser } from "./media_library_browser";
 import { onMounted } from "vue";

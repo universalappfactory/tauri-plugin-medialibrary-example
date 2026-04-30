@@ -36,6 +36,7 @@
     },
     "fs:default",
     "opener:allow-open-url",
+    "log:default",
     {
       "identifier": "opener:allow-open-path",
       "allow": [
