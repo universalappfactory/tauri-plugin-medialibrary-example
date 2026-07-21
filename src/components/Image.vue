@@ -5,6 +5,7 @@
             style="cursor: pointer"
             :src="props.uri"
             v-on:click="$emit('click', props.uri)"
+            />
     </div>
 </template>
 
