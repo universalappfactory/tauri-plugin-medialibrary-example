@@ -23,3 +23,8 @@ cargo tauri android dev
 - `src/components/media_library_browser.ts`: Makes all the plugin calls
 - `src-tauri/capabilities/*.json`: Desktop and Android configuration
 - `src/lib.rs`: Plugin setup.
+
+## Android build
+
+You need to have a suitable Java version in order to build for Android.
+See the [this issue](https://github.com/tauri-apps/tauri/issues/15385) for more information.
