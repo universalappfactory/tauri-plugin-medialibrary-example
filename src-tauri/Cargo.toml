@@ -26,15 +26,16 @@ log = "0.4.33"
 tauri-plugin-fs = "2.5.1"
 tauri-plugin-log = "2.9.0"
 
-tauri-plugin-medialibrary = { version = "0.17.0" }
+#
+tauri-plugin-medialibrary = { version = "0.18.0" }
 [target.'cfg(all(unix, not(target_os = "android")))'.dependencies]
-tauri-plugin-medialibrary = { version = "0.17.0", features = ["amt"] }
+tauri-plugin-medialibrary = { version = "0.18.0", features = ["amt"] }
 
 [target.'cfg(windows)'.dependencies]
-tauri-plugin-medialibrary = { version = "0.17.0", features = ["thumb_cache"] }
+tauri-plugin-medialibrary = { version = "0.18.0", features = ["thumb_cache"] }
 
 
-#for development (you have to comment the above lines)
+#for development (you have to comment the above lines and use the following lines)
 # [target.'cfg(all(unix, target_os = "android"))'.dependencies]
 # tauri-plugin-medialibrary = { path = "../../tauri-plugin-medialibrary"  }
 

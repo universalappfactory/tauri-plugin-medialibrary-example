@@ -20,6 +20,7 @@
     "medialibrary:allow-get-available-sources",
     "medialibrary:allow-request-permissions",
     "medialibrary:allow-delete-image",
+    "medialibrary:allow-delete-images",
     {
       "identifier": "fs:read-files",
       "allow": [

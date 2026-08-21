@@ -76,6 +76,9 @@
                 </fieldset>
             </div>
         </div>
+        <div>
+            <button class="btn" :disabled="!browser.hasSelection.value"  @click="deleteSelected">Delete Selected</button>
+        </div>
 
         <div class="flex-auto overflow-y-scroll h-0 border border-base-300">
             <ul class="list bg-base-100 rounded-box gap-4">
@@ -100,6 +103,8 @@
 
                     <!-- using the custom 'image' protocol -->
                     <!-- <Image @click="openImage(item)" :uri="item.imageUri" /> -->
+
+                    <Checkbox v-model="item.selected" />
 
                     <!-- using the custom 'thumbnail' protocol -->
                     <Image @click="openImage(item)" :uri="item.thumbnailUri" />
@@ -137,8 +142,9 @@
                             </p>
                         </div>
                     </div>
-                    <div @click="deleteItem(item)" class="flex flex-col">
-                        <button class="btn">Del</button>
+                    <div class="flex flex-col">
+                        <button @click="deleteItem(item)" class="btn">Del</button>
+
                     </div>
                 </li>
 
@@ -153,6 +159,14 @@
                 </li>
             </ul>
         </div>
+
+        <Confirm
+            :isOpen="confirmDelete.isOpen.value"
+            :title="confirmDelete.title.value"
+            :message="confirmDelete.message.value"
+            @ok="confirmDelete.confirm"
+            @cancel="confirmDelete.cancel"
+        />
     </div>
 </template>
 
@@ -161,15 +175,20 @@ import ThumbnailByCommand from "./ThumbnailByCommand.vue";
 import Image from "./Image.vue";
 import ErrorHandler from "./ErrorHandler.vue";
 import { useMediaLibraryBrowser } from "./media_library_browser";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import {
     ImageInfo,
     hasMetaData,
     getMetaData,
 } from "../../../tauri-plugin-medialibrary/guest-js";
 import { openUrl, openPath } from "@tauri-apps/plugin-opener";
+import Confirm from "./Confirm.vue";
+import { useConfirm } from "./useConfirm";
+import Checkbox from "./Checkbox.vue";
 
 const browser = useMediaLibraryBrowser();
+
+const confirmDelete = useConfirm("Delete Image", "Really delete this image?");
 
 onMounted(async () => {
     await browser.getSources();
@@ -190,7 +209,17 @@ const openImage = async (image: ImageInfo) => {
 };
 
 const deleteItem = async (item: ImageInfo) => {
+  confirmDelete.execute(item, async () => {
     console.log("delete item", item);
     await browser.deleteImage(item.contentUri);
+  });
 };
+
+const deleteSelected = async () => {
+  confirmDelete.execute("", async () => {
+    await browser.deleteSelected();
+  });
+};
+
+
 </script>

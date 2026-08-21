@@ -27,13 +27,19 @@ import {
 //   deleteImage as pluginDeleteImage,
 //   SortDirection,
 //   SortColumn,
+//   deleteImages,
 // } from "../../../tauri-plugin-medialibrary/guest-js/index";
 
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
+import { deleteImages } from "../../../tauri-plugin-medialibrary/guest-js";
 
 export interface Page {
   limit: number;
   offset: number;
+}
+
+export interface SelectableImageInfo extends ImageInfo {
+  selected: boolean;
 }
 
 export function useMediaLibraryBrowser() {
@@ -41,7 +47,7 @@ export function useMediaLibraryBrowser() {
   const selectedSource = ref<string>("");
   const sortDirection = ref<SortDirection>(SortDirection.Descending);
   const sortColumn = ref<SortColumn>(SortColumn.DateAdded);
-  const images = ref<ImageInfo[]>([]);
+  const images = ref<SelectableImageInfo[]>([]);
   const availableSources = ref<MediaLibrarySource[]>([]);
   const permissionState = ref<PermissionResponse | null>();
   let currentPage: Page | undefined;
@@ -123,7 +129,9 @@ export function useMediaLibraryBrowser() {
       const result = await getImages(request);
       hasNextPage.value = false;
       if (result) {
-        images.value.push(...result.items);
+        images.value.push(
+          ...result.items.map((i) => ({ ...i, selected: false })),
+        );
         hasNextPage.value = result.items.length > 0;
       }
     } catch (e) {
@@ -157,6 +165,24 @@ export function useMediaLibraryBrowser() {
     }
   };
 
+  const deleteSelected = async () => {
+    const selected = images.value
+      .filter((image) => image.selected)
+      .map((i) => i.contentUri);
+    if (selected.length > 0) {
+      try {
+        await deleteImages(selected);
+      } catch (e) {
+        handleError(e);
+      }
+    }
+    images.value = images.value.filter((image) => !image.selected);
+  };
+
+  const hasSelection = computed(() =>
+    images.value.some((image) => image.selected),
+  );
+
   watch(selectedSource, () => {
     loadImages();
   });
@@ -181,8 +207,10 @@ export function useMediaLibraryBrowser() {
     nextPage,
     hasNextPage,
     getImage,
+    deleteSelected,
     sortDirection,
     sortColumn,
     deleteImage,
+    hasSelection,
   };
 }

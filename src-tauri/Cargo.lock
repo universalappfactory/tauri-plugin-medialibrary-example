@@ -4405,9 +4405,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-plugin-medialibrary"
-version = "0.17.0"
+version = "0.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "44e441270a618d0b1fa54874e0691fc91a833857c83d6eefd9aa138fdbbd050b"
+checksum = "b9e5f053d6bd62a59e3ea595f3aa559da2c068045fa28806cd879604dd573727"
 dependencies = [
  "allmytoes",
  "base64 0.22.1",
